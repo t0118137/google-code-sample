@@ -68,6 +68,7 @@ class VideoPlayer:
         """Plays a random video from the video library."""
         
         displayAllVideos = self._video_library.get_all_videos()
+        # random choose of the video
         random.choice(list(displayAllVideos))
         for videos in displayAllVideos:
             print("Playing Video: ", videos.title)
@@ -78,14 +79,19 @@ class VideoPlayer:
         """Pauses the current video."""
         
         x = 0
+        # setting global variable for pause so that 
+        # can be used in other functions
         global pause
+        # if none video was pausing
         if input == "pause":
             x = x + 1
             print("Pausing Video: ", playVideo.title)
             pause = True
+        # if there is a video pausing
         elif x >= 2:
             print("Video already paused:", playVideo.title)
             pause = True
+        #if no video can be paused
         else:
             print("Cannot pause video: No video is currently playing")
             pause = False
@@ -94,16 +100,18 @@ class VideoPlayer:
 
     def continue_video(self):
         """Resumes playing the current video."""
-
+        
+        # continue a pausing video
         if pause:
             print("Continuing video:", playVideo.title)
+        # if no video was paused
         else:
             print("Cannot continue video: Video is not paused")
 
 
     def show_playing(self):
         """Displays video currently playing."""
-
+        
         currentPlaying = self._video_library.get_all_videos()
         getTheCurrent = playVideo.title + playVideo.id + playVideo.tags
         print("Currently Playing:", getTheCurrent)
@@ -120,9 +128,13 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
+        
+        # lower case the playlist name
         pl = playlist_name.lower()
+        # create a whole new playlist
         if pl:
             print("Successfully created new playlist: my_PLAYlist")
+        # if the playlist is already existing
         else:
             print("Cannot create playlist: A playlist with the same name already exists")
         
@@ -134,6 +146,7 @@ class VideoPlayer:
             playlist_name: The playlist name.
             video_id: The video_id to be added.
         """
+        # add a video into playlist by video id
         if input == "ADD_TO_PLAYLIST" + playlist_name + video_id:
             print("Added video to my_playlist:", playVideo.title)
 
