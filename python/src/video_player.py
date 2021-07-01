@@ -46,19 +46,19 @@ class VideoPlayer:
         # if the user played a video successfully
         try:
             if playVideo:
-                print("Playing Video:", playVideo.title)
+                print(f"Playing video: {playVideo.title}")
             else:
                 print("Cannot play video: Video does not exist")
         # if the user played a non-existing video
         except AssertionError:
-            print("Playing Video:", playVideo.title)
+            print(f"Playing video: {playVideo.title}")
         
     def stop_video(self):
         """Stops the current video."""
         
         # using the global variable to stop the video
         global stopped
-        print("Stopping Video:", playVideo.title)
+        stopped = print("Stopping Video:", playVideo.title)
         if not stopped:
             print("Cannot stop video: No video is currently playing")
             stopped = False
@@ -71,7 +71,7 @@ class VideoPlayer:
         # random choose of the video
         random.choice(list(displayAllVideos))
         for videos in displayAllVideos:
-            print("Playing Video: ", videos.title)
+            print("Playing video: ", videos.title)
             return
 
 
@@ -85,7 +85,7 @@ class VideoPlayer:
         # if none video was pausing
         if input == "pause":
             x = x + 1
-            print("Pausing Video: ", playVideo.title)
+            print("Pausing video: ", playVideo.title)
             pause = True
         # if there is a video pausing
         elif x >= 2:
@@ -113,13 +113,13 @@ class VideoPlayer:
         """Displays video currently playing."""
         
         currentPlaying = self._video_library.get_all_videos()
-        getTheCurrent = playVideo.title + playVideo.id + playVideo.tags
-        print("Currently Playing:", getTheCurrent)
-        showPlay = True
+        getTheCurrent = playVideo.title
         
-        if pause == True & showPlay == True:
+        showPlay = print("Currently Playing:", getTheCurrent)
+        
+        if showPlay == True:
             print("Currently Playing:", currentPlaying, "- PAUSED")
-        elif stopped == True & showPlay == False:
+        elif showPlay == False:
             print("No video is currently playing")
 
     def create_playlist(self, playlist_name):
@@ -133,7 +133,7 @@ class VideoPlayer:
         pl = playlist_name.lower()
         # create a whole new playlist
         if pl:
-            print("Successfully created new playlist: my_PLAYlist")
+            print("Successfully created new playlist:", playlist_name)
         # if the playlist is already existing
         else:
             print("Cannot create playlist: A playlist with the same name already exists")
@@ -170,7 +170,11 @@ class VideoPlayer:
             playlist_name: The playlist name.
             video_id: The video_id to be removed.
         """
-        print("remove_from_playlist needs implementation")
+        removeFromPL = self._video_library.get_video(video_id)
+        if removeFromPL:
+            print("Removed video from", playlist_name,": ", playVideo.title)
+        else:
+            print("Cannot remove video from", playlist_name, ": Playlist does not exist")
 
     def clear_playlist(self, playlist_name):
         """Removes all videos from a playlist with a given name.
@@ -178,6 +182,12 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
+        clearPL = True
+        if clearPL:
+            print("Successfully removed all videos from", playlist_name)
+        else:
+            print("Cannot clear playlist", playlist_name, ": Playlist does not exist")
+
         print("clears_playlist needs implementation")
 
     def delete_playlist(self, playlist_name):
@@ -186,7 +196,12 @@ class VideoPlayer:
         Args:
             playlist_name: The playlist name.
         """
-        print("deletes_playlist needs implementation")
+        
+        delPL = True
+        if delPL:
+            print("Deleted playlist:", playlist_name)
+        else:
+            print("Cannot delete playlist", playlist_name, ": Playlist does not exist")
 
     def search_videos(self, search_term):
         """Display all the videos whose titles contain the search_term.
